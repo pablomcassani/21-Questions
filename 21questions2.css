@@ -55,9 +55,9 @@ input, button,select,textarea{
         background-color: #161618;
         background-image: url(jenni.jpg);
         height: 100%;
-        width: 100%;
+        width: 110%;
         background-repeat: no-repeat;
-        background-size: 180%;
+        background-size: 150%;
         position: relative;
         background-position: center top;
 }
