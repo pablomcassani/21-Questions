@@ -14,7 +14,7 @@
     </header>
 
     <section class="container" >
-        <form class="secondContainter" name="21Questions" action="https://formspree.io/f/xayrjdjb" method="POST" target="_blank" action="thanks.html"> 
+        <form class="secondContainter" id="myForm" name="21Questions" action="https://formspree.io/f/xayrjdjb" method="POST" target="_self" > 
 
             <label class="label" for="pregunta1">¿Que pelicula o libro te hizo llorar?</label><br>
             <input type="text" class="input" name="pregunta1" required><br><br>
@@ -40,7 +40,7 @@
             <label class="label"  for="pregunta8">¿Cual fue tu primera impresión cuando me conociste?</label><br>
             <input type="text" class="input" name="pregunta8" required><br><br>
 
-            <label class="label"  for="pregunta9">¿Como fué tu primer beso?</label><br>
+            <label class="label"  for="pregunta9">¿Como fue tu primer beso?</label><br>
             <input type="text" class="input" name="pregunta9" required><br><br>
 
             <label class="label"  for="pregunta10">¿Que es lo que más te gusta en mi?</label><br>
@@ -78,9 +78,43 @@
 
             <label class="label" for="pregunta21">¿Que es lo más importante que cambiarías en este mundo?</label><br>
             <input type="text" class="input" name="pregunta21"required><br><br>
-            <button type="submit" class="button" href="thanks.html">Enviar</button>
+            <button type="submit" class="button" action="thanks.html">Enviar</button>
+            <input type="hidden" name="_next" value="//site.io/thanks.html" />
         </form>
-     
+        <script>
+            document.getElementById('myForm').addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent the default form submission
+
+                // Perform any additional actions or validation here
+
+                // Submit the form using Fetch API
+                fetch('https://formspree.io/f/xayrjdjb', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        pregunta1: document.getElementsByName('pregunta1')[0].value,
+                        pregunta2: document.getElementsByName('pregunta2')[0].value,
+                        // Include other form fields as needed
+                    }),
+                })
+                .then(response => {
+                    // Handle the response if needed
+                    if (response.ok) {
+                        // Redirect after a successful submission
+                        window.location.href = 'thanks.html';
+                    } else {
+                        // Handle errors or show a message to the user
+                        console.error('Error submitting the form');
+                    }
+                })
+                .catch(error => {
+                    // Handle network or other errors
+                    console.error('Network error:', error);
+                });
+            });
+        </script>
     </section>
 </body>
 </html>
